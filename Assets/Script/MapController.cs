@@ -11,18 +11,31 @@ public class MapController : MonoBehaviour
         mapUnderMatrixForm = new Dictionary<Cell, Vector2>();
         int numRow = GameUtility.numRow;
         int numCol = GameUtility.numCol;
+        int midRow = (int)Mathf.Floor(numRow / 2f);
+        Debug.Log("Mid row la:" + midRow);
+        int maxRowToRemove = numRow - GameUtility.minRow;
         for (int i = 0; i < numRow; i++)
         {
-            Vector2 offset = Vector2.zero;
-            if (i % 2 == 0)
-            {
-
-            }
             for (int j = 0; j < numCol; j++)
             {
-                Vector2 position = new Vector2(i, -j);
-                var Icell = Instantiate(cellBlueprint, position, Quaternion.identity, transform);
-                mapUnderMatrixForm.TryAdd(Icell.GetComponentInChildren<Cell>(), position);
+                // int isEvenCol = j % 2;
+                int numRowToremove = Mathf.Abs(j % (2 * maxRowToRemove) - maxRowToRemove); //3, 2
+                int numRowOfColumn = GameUtility.maxRow - numRowToremove; //6, 7
+                int numIndexNeedFallBack = (int)Mathf.Floor(numRowOfColumn / 2); //3, 4
+                int minIndexRange = midRow - numIndexNeedFallBack; //1, 0
+                int maxIndexRange = numRowOfColumn + minIndexRange - 1; // 6, 6
+
+                if (i >= minIndexRange && i <= maxIndexRange)
+                {
+                    float offsetX = GameUtility.cellSize.x / GameUtility.PPU / 10;
+                    Vector2 position = new Vector2(j + ((j * offsetX) * 2), -i * 2);
+                    if (j % 2 != 0)
+                    {
+                        position.y += 0.5f * 2;
+                    }
+                    var Icell = Instantiate(cellBlueprint, position, Quaternion.identity, transform);
+                    mapUnderMatrixForm.TryAdd(Icell.GetComponentInChildren<Cell>(), position);
+                }
             }
         }
     }
