@@ -27,8 +27,9 @@ public class MapController : MonoBehaviour
 
                 if (i >= minIndexRange && i <= maxIndexRange)
                 {
-                    float offsetX = GameUtility.cellSize.x / GameUtility.PPU / 10;
-                    Vector2 position = new Vector2(j + ((j * offsetX) * 2), -i * 2);
+                    float offsetX = GameUtility.cellSize.x / GameUtility.PPU;
+                    float offsetY = GameUtility.cellSize.y / GameUtility.PPU;
+                    Vector2 position = new Vector2(j * offsetX + j * (-19 / GameUtility.PPU), -i * offsetY);
                     if (j % 2 != 0)
                     {
                         position.y += 0.5f * 2;
