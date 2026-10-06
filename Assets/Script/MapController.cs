@@ -34,7 +34,9 @@ public class MapController : MonoBehaviour
                     {
                         position.y += 0.5f * 2;
                     }
-                    var Icell = Instantiate(cellBlueprint, position, Quaternion.identity, transform);
+                    var Icell = Instantiate(cellBlueprint, position + (Vector2)transform.position, Quaternion.identity, transform);
+                    var Cell = Icell.GetComponent<Cell>();
+                    Cell.Position = new Vector2(i, j);
                     mapUnderMatrixForm.TryAdd(Icell.GetComponentInChildren<Cell>(), position);
                 }
             }

@@ -3,7 +3,7 @@
     "name": "InputMap",
     "maps": [
         {
-            "name": "Click",
+            "name": "MouseInput",
             "id": "1f272925-6ee6-4201-9f07-84b4eae552a4",
             "actions": [
                 {

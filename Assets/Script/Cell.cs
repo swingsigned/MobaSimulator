@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    [SerializeField] private int x;
-    [SerializeField] private int y;
-    [SerializeField] private bool isAvailable;
-    [SerializeField] private bool isTeamA;
-    public int X
+    [SerializeField] private Vector2 position;
+    [SerializeField] private bool isAvailable = false;
+    [SerializeField] private bool isTeamA = false;
+    public Vector2 Position
     {
-        set => x = value;
-        get => x;
-    }
-    public int Y
-    {
-        set => y = value;
-        get => y;
+        set => position = value;
+        get => position;
     }
     public bool IsAvailable
     {
@@ -26,4 +20,5 @@ public class Cell : MonoBehaviour
         get => isTeamA;
         set => isTeamA = value;
     }
+
 }
