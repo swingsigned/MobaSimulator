@@ -7,11 +7,11 @@ public class CellVisual : MonoBehaviour
     [SerializeField] private bool isSel;
     public void change2SelSprite()
     {
-        if (!isSel && !GameUtility.Isselected)
+        if (!isSel && !GameUtility.IsCellselected)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = selSprite;
             isSel = true;
-            GameUtility.Isselected = true;
+            GameUtility.IsCellselected = true;
         }
     }
     public void change2NorSprite()
@@ -20,7 +20,7 @@ public class CellVisual : MonoBehaviour
         {
             GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
             isSel = false;
-            GameUtility.Isselected = false;
+            GameUtility.IsCellselected = false;
         }
     }
     public void changeSprite()

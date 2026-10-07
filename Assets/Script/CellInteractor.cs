@@ -4,6 +4,7 @@ public class CellInteractor : IInteractCell
 {
     public void Interact(Collider2D hit)
     {
+        if (!hit) return;
         Cell cell = hit.GetComponentInParent<Cell>();
 
         if (cell == null)

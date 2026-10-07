@@ -9,7 +9,8 @@ public static class GameUtility
     public static int numCol = 7;
     public static float PPU = cellSize.y / 2;
     static public int minRow = 6, maxRow = 9;
-    static public bool Isselected = false;
+    static public bool IsCellselected = false;
+    static public bool hasChampSelected = false;
     public static Vector2 changeGridToWorld(int XinGrid, int YinGrid)
     {
         return Vector2.zero;
@@ -23,10 +24,16 @@ public static class GameUtility
         Vector3 screenPointV3 = screenPoint;
         return Camera.main.ScreenToWorldPoint(screenPointV3);
     }
-    public static Collider2D checkIfMouseHit(Vector2 mousePosition)
+    public static bool checkIfMouseHit<T>(Vector2 mousePosition, out Collider2D colHit)
     {
         Vector2 worldPoint = GameUtility.changeScreenPointToWorldPoint(mousePosition);
-        return Physics2D.OverlapPoint(worldPoint);
-
+        var hit = Physics2D.OverlapPoint(worldPoint);
+        if (hit != null && hit.TryGetComponent<T>(out _))
+        {
+            colHit = hit;
+            return true;
+        }
+        colHit = null;
+        return false;
     }
 }

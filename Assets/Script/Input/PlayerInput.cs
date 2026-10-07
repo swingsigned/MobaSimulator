@@ -5,6 +5,7 @@ public class PlayerInput : MonoBehaviour
 {
     private InputManager input;
     private IInteractCell cellInteractor;
+    private IInteractChamp champInteracter;
 
     private void Awake()
     {
@@ -28,8 +29,17 @@ public class PlayerInput : MonoBehaviour
     private void OnClick(InputAction.CallbackContext context)
     {
         Vector2 mousePosition = input.MouseInput.MousePosition.ReadValue<Vector2>();
-        Collider2D hit = GameUtility.checkIfMouseHit(mousePosition);
-        cellInteractor = new CellInteractor();
-        cellInteractor.Interact(hit);
+        if (GameUtility.hasChampSelected)
+        {
+            GameUtility.checkIfMouseHit<Cell>(mousePosition, out Collider2D hit);
+            cellInteractor = new CellInteractor();
+            cellInteractor.Interact(hit);
+        }
+        else
+        {
+            GameUtility.checkIfMouseHit<Champion>(mousePosition, out Collider2D hit);
+            champInteracter = new ChampInteractor();
+            cellInteractor.Interact(hit);
+        }
     }
 }
