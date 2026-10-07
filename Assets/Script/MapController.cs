@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MapController : MonoBehaviour
 {
-    [SerializeField] private Dictionary<Cell, Vector2> mapUnderMatrixForm;
+    [SerializeField] private Dictionary<Vector2, Cell> mapUnderMatrixForm;
     [SerializeField] private GameObject prefabCell;
+    [SerializeField] private Champion demoChampion;
     public void SpawnCell(GameObject cellBlueprint)
     {
-        mapUnderMatrixForm = new Dictionary<Cell, Vector2>();
+        mapUnderMatrixForm = new Dictionary<Vector2, Cell>();
         int numRow = GameUtility.numRow;
         int numCol = GameUtility.numCol;
         int midRow = (int)Mathf.Floor(numRow / 2f);
@@ -37,13 +38,23 @@ public class MapController : MonoBehaviour
                     var Icell = Instantiate(cellBlueprint, position + (Vector2)transform.position, Quaternion.identity, transform);
                     var Cell = Icell.GetComponent<Cell>();
                     Cell.Position = new Vector2(i, j);
-                    mapUnderMatrixForm.TryAdd(Icell.GetComponentInChildren<Cell>(), position);
+                    mapUnderMatrixForm.TryAdd(Cell.Position, Icell.GetComponentInChildren<Cell>());
                 }
             }
         }
     }
+    public Cell getCellByPositionOnMatrix(Vector2 position)
+    {
+        mapUnderMatrixForm.TryGetValue(position, out Cell cell);
+        if (cell == null) return null;
+        return cell;
+    }
     void Start()
     {
         SpawnCell(prefabCell);
+        var cell = getCellByPositionOnMatrix(demoChampion.PositionByCell);
+        Debug.Log(cell);
+        demoChampion.transform.position = cell.transform.position;
+        cell.AddNewChamp(demoChampion);
     }
 }

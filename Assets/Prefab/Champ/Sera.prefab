@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7445054808678551770, guid: b23f87c9814d28c4abb78d71b2f09d2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7535780718532328621}
   - component: {fileID: 5389989044681513187}
+  - component: {fileID: 6697709980218990554}
   m_Layer: 0
   m_Name: Sera
   m_TagString: Untagged
@@ -170,3 +171,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.174422, y: 1.1842949}
   m_EdgeRadius: 0
+--- !u!114 &6697709980218990554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6741377479962224148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa34b75c82aaef4f968f4f4f76241b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Champion
+  positionByCell: {x: 4, y: 3}
+  nameChamp: Sera

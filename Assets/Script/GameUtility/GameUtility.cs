@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameUtility
@@ -11,6 +13,7 @@ public static class GameUtility
     static public int minRow = 6, maxRow = 9;
     static public bool IsCellselected = false;
     static public bool hasChampSelected = false;
+    static public List<Champion> curChamps; //Demo
     public static Vector2 changeGridToWorld(int XinGrid, int YinGrid)
     {
         return Vector2.zero;
@@ -26,9 +29,9 @@ public static class GameUtility
     }
     public static bool checkIfMouseHit<T>(Vector2 mousePosition, out Collider2D colHit)
     {
-        Vector2 worldPoint = GameUtility.changeScreenPointToWorldPoint(mousePosition);
+        Vector2 worldPoint = changeScreenPointToWorldPoint(mousePosition);
         var hit = Physics2D.OverlapPoint(worldPoint);
-        if (hit != null && hit.TryGetComponent<T>(out _))
+        if (hit != null && hit.GetComponentInParent<T>() != null)
         {
             colHit = hit;
             return true;

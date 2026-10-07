@@ -29,17 +29,31 @@ public class PlayerInput : MonoBehaviour
     private void OnClick(InputAction.CallbackContext context)
     {
         Vector2 mousePosition = input.MouseInput.MousePosition.ReadValue<Vector2>();
-        if (GameUtility.hasChampSelected)
+        if (!GameUtility.hasChampSelected)
         {
-            GameUtility.checkIfMouseHit<Cell>(mousePosition, out Collider2D hit);
-            cellInteractor = new CellInteractor();
-            cellInteractor.Interact(hit);
+            if (GameUtility.checkIfMouseHit<Cell>(mousePosition, out Collider2D hit))
+            {
+                cellInteractor = new CellInteractor();
+                cellInteractor.Interact(hit);
+                var champs = hit.GetComponentInParent<Cell>().GetChampList();
+                Camera.main.transform.position = new Vector3(
+                    hit.transform.position.x,
+                    hit.transform.position.y,
+                    Camera.main.transform.position.z
+                );
+                foreach (var champ in champs)
+                {
+                    Debug.Log(champ.Name);
+                }
+            }
         }
-        else
-        {
-            GameUtility.checkIfMouseHit<Champion>(mousePosition, out Collider2D hit);
-            champInteracter = new ChampInteractor();
-            cellInteractor.Interact(hit);
-        }
+        // else
+        // {
+        //     if (GameUtility.checkIfMouseHit<Champion>(mousePosition, out Collider2D hit))
+        //     {
+        //         champInteracter = new ChampInteractor();
+        //         cellInteractor.Interact(hit);
+        //     }
+        // }
     }
 }

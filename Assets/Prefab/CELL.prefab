@@ -48,6 +48,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isAvailable: 0
   isTeamA: 0
+  champions: []
 --- !u!1 &8423124045622361132
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ GameObject:
   - component: {fileID: 3328681040894348594}
   - component: {fileID: 5307044267882577449}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: VisualCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
