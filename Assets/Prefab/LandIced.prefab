@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7378482646049212962}
   - component: {fileID: 8880323268947266642}
   m_Layer: 0
-  m_Name: CELL
+  m_Name: LandIced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isAvailable: 0
   isTeamA: 0
-  champions: []
 --- !u!1 &8423124045622361132
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,8 +59,8 @@ GameObject:
   - component: {fileID: 6153912029487215158}
   - component: {fileID: 267018526507487721}
   - component: {fileID: 5208052104452226955}
-  - component: {fileID: 3328681040894348594}
   - component: {fileID: 5307044267882577449}
+  - component: {fileID: 7745450044755427977}
   m_Layer: 0
   m_Name: VisualCell
   m_TagString: Untagged
@@ -133,7 +132,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8089102753751044323, guid: 16fd2f8bafe89a54f859be5392c3cf2f, type: 3}
+  m_Sprite: {fileID: 920415970, guid: 973349387cf80ab42a4d699589565e61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,7 +169,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &3328681040894348594
+--- !u!114 &5307044267882577449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423124045622361132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb442a21db81bb40adbd4ed0c74dd45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CellVisual
+  normalSprite: {fileID: 850999559, guid: 973349387cf80ab42a4d699589565e61, type: 3}
+  selSprite: {fileID: -2870143772410390703, guid: 973349387cf80ab42a4d699589565e61, type: 3}
+  isSel: 0
+--- !u!60 &7745450044755427977
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +222,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.6666667, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -216,33 +230,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.3333334, y: -0.0625}
-      - {x: 1.3333334, y: 0.125}
-      - {x: 0.9375, y: 1}
-      - {x: -0.9375, y: 1}
-      - {x: -1.0208334, y: 0.8125}
-      - {x: -1.2291667, y: 0.3125}
-      - {x: -1.2916667, y: 0.20833334}
-      - {x: -1.3333334, y: 0.0625}
-      - {x: -1.3333334, y: -0.125}
-      - {x: -0.9375, y: -1}
-      - {x: 0.9375, y: -1}
-      - {x: 1.0208334, y: -0.8125}
-      - {x: 1.2291667, y: -0.3125}
-      - {x: 1.2916667, y: -0.20833334}
+    - - {x: 0.03359617, y: 0.46789536}
+      - {x: -0.026514255, y: 0.47040206}
+      - {x: -0.46831194, y: 0.2522805}
+      - {x: -0.4696206, y: -0.03289697}
+      - {x: -0.029624283, y: -0.24938723}
+      - {x: 0.03216201, y: -0.24820349}
+      - {x: 0.4670033, y: -0.026857112}
+      - {x: 0.4680342, y: 0.24732575}
   m_UseDelaunayMesh: 1
---- !u!114 &5307044267882577449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423124045622361132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb442a21db81bb40adbd4ed0c74dd45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CellVisual
-  normalSprite: {fileID: 8089102753751044323, guid: 16fd2f8bafe89a54f859be5392c3cf2f, type: 3}
-  selSprite: {fileID: 4158114938977003747, guid: 16fd2f8bafe89a54f859be5392c3cf2f, type: 3}
-  isSel: 0

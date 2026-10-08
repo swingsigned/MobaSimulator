@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -12,32 +13,32 @@ public class MapController : MonoBehaviour
         mapUnderMatrixForm = new Dictionary<Vector2, Cell>();
         int numRow = GameUtility.numRow;
         int numCol = GameUtility.numCol;
-        int midRow = (int)Mathf.Floor(numRow / 2f);
-        Debug.Log("Mid row la:" + midRow);
-        int maxRowToRemove = numRow - GameUtility.minRow;
-        for (int i = 0; i < numRow; i++)
+        int midCol = (int)Mathf.Floor(numCol / 2f);
+        Debug.Log("Mid col la:" + midCol);
+        int maxColToRemove = numCol - GameUtility.minCol;
+        for (int row = 0; row < numRow; row++)
         {
-            for (int j = 0; j < numCol; j++)
+            for (int col = 0; col < numCol; col++)
             {
                 // int isEvenCol = j % 2;
-                int numRowToremove = Mathf.Abs(j % (2 * maxRowToRemove) - maxRowToRemove); //3, 2
-                int numRowOfColumn = GameUtility.maxRow - numRowToremove; //6, 7
-                int numIndexNeedFallBack = (int)Mathf.Floor(numRowOfColumn / 2); //3, 4
-                int minIndexRange = midRow - numIndexNeedFallBack; //1, 0
-                int maxIndexRange = numRowOfColumn + minIndexRange - 1; // 6, 6
-
-                if (i >= minIndexRange && i <= maxIndexRange)
+                int numColToremove = Mathf.Abs(row % (2 * maxColToRemove) - maxColToRemove); //3, 2
+                int numColOfRow = GameUtility.maxCol - numColToremove; //6, 7
+                int numIndexNeedFallBack = (int)Mathf.Floor(numColOfRow / 2); //3, 4
+                int minIndexRange = midCol - numIndexNeedFallBack; //1, 0
+                int maxIndexRange = numColOfRow + minIndexRange - 1; // 6, 6
+                if (col >= minIndexRange && col <= maxIndexRange)
                 {
+                    Debug.Log(minIndexRange + $",{col}," + maxIndexRange);
                     float offsetX = GameUtility.cellSize.x / GameUtility.PPU;
                     float offsetY = GameUtility.cellSize.y / GameUtility.PPU;
-                    Vector2 position = new Vector2(j * offsetX + j * (-19 / GameUtility.PPU), -i * offsetY);
-                    if (j % 2 != 0)
+                    Vector2 position = new Vector2(col * offsetX, -(row * offsetY - (row * (15 / GameUtility.PPU))));
+                    if (row % 2 != 0)
                     {
-                        position.y += 0.5f * 2;
+                        position.x -= 0.5f;
                     }
                     var Icell = Instantiate(cellBlueprint, position + (Vector2)transform.position, Quaternion.identity, transform);
                     var Cell = Icell.GetComponent<Cell>();
-                    Cell.Position = new Vector2(i, j);
+                    Cell.Position = new Vector2(col, row);
                     mapUnderMatrixForm.TryAdd(Cell.Position, Icell.GetComponentInChildren<Cell>());
                 }
             }
@@ -52,9 +53,9 @@ public class MapController : MonoBehaviour
     void Start()
     {
         SpawnCell(prefabCell);
-        var cell = getCellByPositionOnMatrix(demoChampion.PositionByCell);
-        Debug.Log(cell);
-        demoChampion.transform.position = cell.transform.position;
-        cell.AddNewChamp(demoChampion);
+        // var cell = getCellByPositionOnMatrix(demoChampion.PositionByCell);
+        // Debug.Log(cell);
+        // demoChampion.transform.position = cell.transform.position;
+        // cell.AddNewChamp(demoChampion);
     }
 }
