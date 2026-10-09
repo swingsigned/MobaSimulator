@@ -7,10 +7,13 @@ public class MapController : MonoBehaviour
 {
 
     [SerializeField] private Dictionary<Vector2, Cell> mapUnderMatrixForm;
-    [SerializeField] private GameObject prefabCell;
     [SerializeField] private Champion demoChampion;
-    public void SpawnCell(GameObject cellBlueprint)
+    [SerializeField] private GameObject cellDefault;
+    [SerializeField] private TerrainData terrainData;
+    [SerializeField] private MapData mapData;
+    public void SpawnCell()
     {
+        var lookup = mapData.InitializeLookup();
         mapUnderMatrixForm = new Dictionary<Vector2, Cell>();
         int numRow = GameUtility.numRow;
         int numCol = GameUtility.numCol;
@@ -37,10 +40,20 @@ public class MapController : MonoBehaviour
                     {
                         position.x -= 0.5f;
                     }
-                    var Icell = Instantiate(cellBlueprint, position + (Vector2)transform.position, Quaternion.identity, transform);
-                    var Cell = Icell.GetComponent<Cell>();
-                    Cell.Position = new Vector2(col, row);
-                    mapUnderMatrixForm.TryAdd(Cell.Position, Icell.GetComponentInChildren<Cell>());
+                    Terrain terrainAtCell = new Terrain();
+                    terrainAtCell.terrainPrefab = cellDefault;
+                    terrainAtCell.terrainType = TerrainType.Grass;
+                    if (lookup.TryGetValue(new Vector2Int(col, row), out TerrainType terrainType))
+                    {
+                        terrainAtCell = terrainData.GetTerrain(terrainType);
+                    }
+                    var cellBlueprint = terrainAtCell.terrainPrefab;
+                    var iCell = Instantiate(cellBlueprint, position + (Vector2)transform.position, Quaternion.identity, transform);
+                    var cell = iCell.GetComponent<Cell>();
+                    var cellVisualSprite = iCell.GetComponentInChildren<SpriteRenderer>();
+                    cellVisualSprite.sortingOrder = row;
+                    cell.Position = new Vector2(col, row);
+                    mapUnderMatrixForm.TryAdd(cell.Position, iCell.GetComponentInChildren<Cell>());
                 }
             }
         }
@@ -53,7 +66,7 @@ public class MapController : MonoBehaviour
     }
     void Start()
     {
-        SpawnCell(prefabCell);
+        SpawnCell();
         // var cell = getCellByPositionOnMatrix(demoChampion.PositionByCell);
         // Debug.Log(cell);
         // demoChampion.transform.position = cell.transform.position;

@@ -165,8 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924be2e6e39a4734d974a34002fd05f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  prefabCell: {fileID: 6881521965947523344, guid: e78f992f4bd1e8c4bab2714357c64e74, type: 3}
   demoChampion: {fileID: 0}
+  cellDefault: {fileID: 6881521965947523344, guid: e78f992f4bd1e8c4bab2714357c64e74, type: 3}
+  terrainData: {fileID: 11400000, guid: 2160a456ba1f0bd48a8eceb216252b61, type: 2}
+  mapData: {fileID: 11400000, guid: 65473c5aef275864695300acc1dd0506, type: 2}
 --- !u!114 &136157721
 MonoBehaviour:
   m_ObjectHideFlags: 0
