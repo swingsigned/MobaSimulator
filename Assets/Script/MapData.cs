@@ -17,7 +17,9 @@ public class MapCellData
 public class MapData : ScriptableObject
 {
     public List<MapCellData> cells = new();
-
+    public int numCol;
+    public int numRow;
+    public int turnLeft = 1;
     public Dictionary<Vector2Int, TerrainType> InitializeLookup()
     {
         var lookup = new Dictionary<Vector2Int, TerrainType>();

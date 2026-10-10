@@ -9,14 +9,14 @@ public class IsometricMapEditor : EditorWindow
 
     private TerrainType selectedTerrain = TerrainType.Grass;
     private bool eraseMode;
-
     private int mapWidth = GameUtility.numCol;
     private int mapHeight = GameUtility.numRow;
 
     // Kích thước một ô trên màn hình Editor.
-    private float halfCellWidth = 32f;
-    private float halfCellHeight = 32f;
-    float h = 16;
+    private float cellWidth = 64f;
+    private float cellHeight = 64f;
+    float heightTriangle = 14;
+    private int turnLeft = 1;
 
     private Vector2 scrollPosition;
 
@@ -95,26 +95,25 @@ public class IsometricMapEditor : EditorWindow
             typeof(TerrainData),
             false
         );
-
         mapWidth = EditorGUILayout.IntSlider(
             "Grid Width", mapWidth, 1, 32
         );
-
         mapHeight = EditorGUILayout.IntSlider(
             "Grid Height", mapHeight, 1, 32
         );
-
-        halfCellWidth = EditorGUILayout.Slider(
-            "Half Cell Width", halfCellWidth, 10f, 64f
+        cellWidth = EditorGUILayout.Slider(
+            "Cell Width", cellWidth, 10f, 64f
         );
 
-        halfCellHeight = EditorGUILayout.Slider(
-            "Half Cell Height", halfCellHeight, 10f, 64f
+        cellHeight = EditorGUILayout.Slider(
+            "Cell Height", cellHeight, 10f, 64f
         );
 
-        eraseMode = EditorGUILayout.Toggle(
-            "Erase Mode", eraseMode
+        heightTriangle = EditorGUILayout.Slider(
+            "Height Triangle", heightTriangle, 0, 32
         );
+        turnLeft = EditorGUILayout.IntField("Turn Left", turnLeft);
+        eraseMode = EditorGUILayout.Toggle("Erase Mode", eraseMode);
     }
 
     private void DrawPalette()
@@ -173,77 +172,88 @@ public class IsometricMapEditor : EditorWindow
         );
 
         Vector2 corner = new Vector2(
-            rect.x + (rect.width - (halfCellWidth * mapWidth)) / 2,
-            rect.y + (rect.height - (halfCellHeight * mapHeight)) / 2
+            rect.x + (rect.width - (cellWidth * mapWidth)) / 2,
+            rect.y + (rect.height - (cellHeight * mapHeight)) / 2
         );
 
         Event e = Event.current;
-
+        int midCol = (int)Mathf.Floor(mapWidth / 2f);
+        int maxColToRemove = mapHeight / 2;
+        // Debug.Log(maxColToRemove);
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                Vector2Int position = new Vector2Int(x, y);
-                Vector2 screen = GridToScreen(position, corner);
-
-                Rect cellRect = new Rect(
-                    screen.x,
-                    screen.y,
-                    halfCellWidth,
-                    halfCellHeight
-                );
-
-                TerrainType? type = GetTerrainAt(position);
-
-                Color color = type.HasValue
-                    ? GetTerrainColor(type.Value)
-                    : new Color(0.3f, 0.3f, 0.3f, 0.35f);
-
-                DrawHexCell(cellRect, color);
-
-                // Viền của ô.
-                Vector3[] points =
+                int numColToremove = Mathf.Abs(y % (2 * maxColToRemove) - maxColToRemove); //3, 2
+                // Debug.Log(numColToremove);
+                int numColOfRow = mapWidth - numColToremove; //6, 7
+                int numIndexNeedFallBack = (int)Mathf.Floor(numColOfRow / 2); //3, 4
+                int minIndexRange = midCol - numIndexNeedFallBack; //1, 0
+                int maxIndexRange = numColOfRow + minIndexRange - 1; // 6, 6
+                if (x >= minIndexRange && x <= maxIndexRange)
                 {
-                    new Vector3(cellRect.x , cellRect.y + h),
+                    Vector2Int position = new Vector2Int(x, y);
+                    Vector2 screen = GridToScreen(position, corner);
+
+                    Rect cellRect = new Rect(
+                        screen.x,
+                        screen.y,
+                        cellWidth,
+                        cellHeight
+                    );
+
+                    TerrainType? type = GetTerrainAt(position);
+
+                    Color color = type.HasValue
+                        ? GetTerrainColor(type.Value)
+                        : new Color(0.3f, 0.3f, 0.3f, 0.35f);
+
+                    DrawHexCell(cellRect, color);
+
+                    // Viền của ô.
+                    Vector3[] points =
+                    {
+                    new Vector3(cellRect.x , cellRect.y + heightTriangle),
                     new Vector3(cellRect.x +  cellRect.width / 2,  cellRect.y),
-                    new Vector3(cellRect.x + cellRect.width, cellRect.y + h),
-                    new Vector3(cellRect.x + cellRect.width, cellRect.y + (cellRect.height - h)),
+                    new Vector3(cellRect.x + cellRect.width, cellRect.y + heightTriangle),
+                    new Vector3(cellRect.x + cellRect.width, cellRect.y + (cellRect.height - heightTriangle)),
                     new Vector3(cellRect.x +  cellRect.width / 2, cellRect.y + cellRect.height),
-                    new Vector3(cellRect.x, cellRect.y + (cellRect.height - h)),
-                    new Vector3(cellRect.x , cellRect.y + h)
+                    new Vector3(cellRect.x, cellRect.y + (cellRect.height - heightTriangle)),
+                    new Vector3(cellRect.x , cellRect.y + heightTriangle)
                 };
 
-                Handles.color = color;
-                Handles.DrawAAConvexPolygon(points);
+                    Handles.color = color;
+                    Handles.DrawAAConvexPolygon(points);
 
-                // Hiển thị tọa độ.
-                GUI.Label(
-                    cellRect,
-                    $"{x},{y}",
-                    new GUIStyle(EditorStyles.miniLabel)
-                    {
-                        alignment = TextAnchor.MiddleCenter,
-                        normal =
+                    // Hiển thị tọa độ.
+                    GUI.Label(
+                        cellRect,
+                        $"{x},{y}",
+                        new GUIStyle(EditorStyles.miniLabel)
                         {
+                            alignment = TextAnchor.MiddleCenter,
+                            normal =
+                            {
                             textColor = Color.white
+                            }
                         }
+                    );
+
+                    if (e.type == EventType.MouseDown &&
+                        e.button == 0 &&
+                        cellRect.Contains(e.mousePosition))
+                    {
+                        PaintCell(position);
+                        e.Use();
                     }
-                );
 
-                if (e.type == EventType.MouseDown &&
-                    e.button == 0 &&
-                    cellRect.Contains(e.mousePosition))
-                {
-                    PaintCell(position);
-                    e.Use();
-                }
-
-                if (e.type == EventType.MouseDrag &&
-                    e.button == 0 &&
-                    cellRect.Contains(e.mousePosition))
-                {
-                    PaintCell(position);
-                    e.Use();
+                    if (e.type == EventType.MouseDrag &&
+                        e.button == 0 &&
+                        cellRect.Contains(e.mousePosition))
+                    {
+                        PaintCell(position);
+                        e.Use();
+                    }
                 }
             }
         }
@@ -251,16 +261,15 @@ public class IsometricMapEditor : EditorWindow
         if (e.type == EventType.MouseUp)
             Repaint();
     }
-
     private Vector2 GridToScreen(
         Vector2Int position,
         Vector2 corner)
     {
-        float X = corner.x + (position.x * halfCellWidth);
-        float Y = corner.y + (position.y * halfCellHeight);
+        float X = corner.x + (position.x * cellWidth);
+        float Y = corner.y + (position.y * cellHeight);
         if (position.y % 2 != 0)
         {
-            return new Vector2(X - halfCellWidth / 2, Y);
+            return new Vector2(X - (cellWidth / 2) * turnLeft, Y);
         }
         return new Vector2(X, Y);
     }
@@ -269,18 +278,18 @@ public class IsometricMapEditor : EditorWindow
     {
         EditorGUI.DrawRect(rect, color);
     }
-    //Thằng này vẽ hình thoi
+    //Thằng này vẽ hình luc giac
     private void DrawHexCell(Rect corner, Color color)
     {
         Vector3[] points =
         {
-            new Vector3(corner.x , corner.y + h),
+            new Vector3(corner.x , corner.y + heightTriangle),
             new Vector3(corner.x +  corner.width / 2,  corner.y),
-            new Vector3(corner.x + corner.width, corner.y + h),
-            new Vector3(corner.x + corner.width, corner.y + (corner.height - h)),
+            new Vector3(corner.x + corner.width, corner.y + heightTriangle),
+            new Vector3(corner.x + corner.width, corner.y + (corner.height - heightTriangle)),
             new Vector3(corner.x +  corner.width / 2, corner.y + corner.height),
-            new Vector3(corner.x, corner.y + (corner.height - h)),
-            new Vector3(corner.x , corner.y + h)
+            new Vector3(corner.x, corner.y + (corner.height - heightTriangle)),
+            new Vector3(corner.x , corner.y + heightTriangle)
         };
 
         Handles.color = color;
@@ -312,7 +321,6 @@ public class IsometricMapEditor : EditorWindow
         };
     }
 
-    //EditorUtility.SetDirty(mapData); là cái chó gì ?
     private void PaintCell(Vector2Int position)
     {
         Undo.RecordObject(mapData, "Edit Isometric Map");
@@ -332,6 +340,9 @@ public class IsometricMapEditor : EditorWindow
 
     private void SaveMap()
     {
+        mapData.numCol = mapWidth;
+        mapData.numRow = mapHeight;
+        mapData.turnLeft = turnLeft;
         EditorUtility.SetDirty(mapData);
         AssetDatabase.SaveAssets();
 

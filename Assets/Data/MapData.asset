@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapData
   cells:
   - position: {x: 0, y: 3}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 1, y: 6}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 2, y: 6}
     terrainType: 3
   - position: {x: 3, y: 6}
@@ -26,15 +26,15 @@ MonoBehaviour:
   - position: {x: 5, y: 6}
     terrainType: 3
   - position: {x: 6, y: 6}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 7, y: 6}
     terrainType: 0
   - position: {x: 7, y: 5}
     terrainType: 3
   - position: {x: 8, y: 3}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 1, y: 0}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 2, y: 0}
     terrainType: 3
   - position: {x: 3, y: 0}
@@ -44,21 +44,21 @@ MonoBehaviour:
   - position: {x: 5, y: 0}
     terrainType: 3
   - position: {x: 6, y: 0}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 7, y: 0}
     terrainType: 0
   - position: {x: 1, y: 3}
     terrainType: 3
   - position: {x: 2, y: 3}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 3, y: 3}
     terrainType: 3
   - position: {x: 4, y: 3}
-    terrainType: 3
+    terrainType: 1
   - position: {x: 5, y: 3}
     terrainType: 3
   - position: {x: 6, y: 3}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 7, y: 3}
     terrainType: 3
   - position: {x: 1, y: 5}
@@ -68,11 +68,11 @@ MonoBehaviour:
   - position: {x: 2, y: 5}
     terrainType: 0
   - position: {x: 3, y: 4}
-    terrainType: 0
+    terrainType: 3
   - position: {x: 3, y: 5}
     terrainType: 0
   - position: {x: 4, y: 4}
-    terrainType: 0
+    terrainType: 3
   - position: {x: 4, y: 5}
     terrainType: 1
   - position: {x: 5, y: 5}
@@ -84,7 +84,7 @@ MonoBehaviour:
   - position: {x: 6, y: 5}
     terrainType: 0
   - position: {x: 7, y: 4}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 1, y: 1}
     terrainType: 3
   - position: {x: 2, y: 1}
@@ -92,7 +92,7 @@ MonoBehaviour:
   - position: {x: 2, y: 2}
     terrainType: 0
   - position: {x: 4, y: 2}
-    terrainType: 0
+    terrainType: 3
   - position: {x: 4, y: 1}
     terrainType: 1
   - position: {x: 5, y: 1}
@@ -104,16 +104,18 @@ MonoBehaviour:
   - position: {x: 6, y: 1}
     terrainType: 0
   - position: {x: 7, y: 2}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 7, y: 1}
     terrainType: 3
   - position: {x: 0, y: 2}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 0, y: 4}
-    terrainType: 3
+    terrainType: 4
   - position: {x: 3, y: 1}
     terrainType: 0
   - position: {x: 3, y: 2}
+    terrainType: 3
+  - position: {x: 0, y: 0}
     terrainType: 0
   - position: {x: 0, y: 5}
     terrainType: 0
@@ -137,5 +139,48 @@ MonoBehaviour:
     terrainType: 0
   - position: {x: 8, y: 6}
     terrainType: 0
-  - position: {x: 0, y: 0}
+  - position: {x: 9, y: 2}
     terrainType: 0
+  - position: {x: 9, y: 3}
+    terrainType: 0
+  - position: {x: 10, y: 4}
+    terrainType: 0
+  - position: {x: 9, y: 4}
+    terrainType: 0
+  - position: {x: 9, y: 5}
+    terrainType: 0
+  - position: {x: 9, y: 6}
+    terrainType: 0
+  - position: {x: 8, y: 7}
+    terrainType: 0
+  - position: {x: 7, y: 7}
+    terrainType: 0
+  - position: {x: 5, y: 7}
+    terrainType: 0
+  - position: {x: 6, y: 7}
+    terrainType: 0
+  - position: {x: 4, y: 7}
+    terrainType: 0
+  - position: {x: 3, y: 7}
+    terrainType: 0
+  - position: {x: 2, y: 7}
+    terrainType: 0
+  - position: {x: 1, y: 7}
+    terrainType: 0
+  - position: {x: 2, y: 8}
+    terrainType: 0
+  - position: {x: 3, y: 8}
+    terrainType: 0
+  - position: {x: 4, y: 8}
+    terrainType: 0
+  - position: {x: 5, y: 8}
+    terrainType: 0
+  - position: {x: 6, y: 8}
+    terrainType: 0
+  - position: {x: 7, y: 8}
+    terrainType: 0
+  - position: {x: 8, y: 8}
+    terrainType: 0
+  numCol: 9
+  numRow: 7
+  turnLeft: 1

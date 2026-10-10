@@ -9,11 +9,12 @@ public static class GameUtility
     //For Map
     public static int numRow = 7;
     public static int numCol = 9;
-    public static float PPU = cellSize.y;
+    public static float PPU = 16;
     static public int minCol = 6, maxCol = 9;
     static public bool IsCellselected = false;
     static public bool hasChampSelected = false;
     static public List<Champion> curChamps; //Demo
+    public static Color redTeamCellColor = new Color32(255, 65, 87, 255);
     public static Vector2 changeGridToWorld(int XinGrid, int YinGrid)
     {
         return Vector2.zero;

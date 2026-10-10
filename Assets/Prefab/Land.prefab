@@ -48,6 +48,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isAvailable: 0
   isTeamA: 0
+  type: 3
 --- !u!1 &8423124045622361132
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2870143772410390703, guid: 973349387cf80ab42a4d699589565e61, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.42745098, g: 0.9411765, b: 0.9098039, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -222,7 +223,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -230,12 +231,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.03359617, y: 0.46789536}
-      - {x: -0.026514255, y: 0.47040206}
-      - {x: -0.46831194, y: 0.2522805}
-      - {x: -0.4696206, y: -0.03289697}
-      - {x: -0.029624283, y: -0.24938723}
-      - {x: 0.03216201, y: -0.24820349}
-      - {x: 0.4670033, y: -0.026857112}
-      - {x: 0.4680342, y: 0.24732575}
+    - - {x: 0.048873078, y: 0.93056774}
+      - {x: -0.057068102, y: 0.93525684}
+      - {x: -0.9353491, y: 0.49452874}
+      - {x: -0.92792803, y: -0.04817388}
+      - {x: -0.06041117, y: -0.5018398}
+      - {x: 0.05679153, y: -0.503119}
+      - {x: 0.058766782, y: -0.5040197}
+      - {x: 0.9296755, y: -0.050863717}
+      - {x: 0.93070644, y: 0.4852091}
   m_UseDelaunayMesh: 1

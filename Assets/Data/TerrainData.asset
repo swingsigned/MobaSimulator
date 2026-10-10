@@ -21,3 +21,5 @@ MonoBehaviour:
     terrainType: 2
   - terrainPrefab: {fileID: 6881521965947523344, guid: c0b6b108cad6ee74db07cd0b09fbfe75, type: 3}
     terrainType: 1
+  - terrainPrefab: {fileID: 6881521965947523344, guid: 58980bd3303e65b40bbab0cd8b5cba4f, type: 3}
+    terrainType: 4
