@@ -48,7 +48,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isAvailable: 0
   isTeamA: 0
-  type: 1
+  type: 2
 --- !u!1 &8423124045622361132
 GameObject:
   m_ObjectHideFlags: 0

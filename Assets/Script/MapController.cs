@@ -64,6 +64,8 @@ public class MapController : MonoBehaviour
                         if (cell.Type == TerrainType.HasTurretLand)
                         {
                             cellVisualSprite.flipX = true;
+                            Vector2 offsetXforTurret = cell.transform.GetChild(0).localPosition;
+                            cell.transform.GetChild(0).localPosition = new Vector2(offsetXforTurret.x * -1, offsetXforTurret.y);
                         }
                         if (cell.Type == TerrainType.Land)
                         {
