@@ -4,11 +4,10 @@ using UnityEngine;
 
 public static class GameUtility
 {
+    public static readonly int StrengthId = Shader.PropertyToID("_Strength");
     //For Cell
     public static Vector2 cellSize = new Vector2(32, 32);
     //For Map
-    public static int numRow = 7;
-    public static int numCol = 9;
     public static float PPU = 16;
     static public int minCol = 6, maxCol = 9;
     static public bool IsCellselected = false;

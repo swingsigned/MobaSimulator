@@ -48,7 +48,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isAvailable: 0
   isTeamA: 0
-  type: 2
+  type: 1
 --- !u!1 &8423124045622361132
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 5208052104452226955}
   - component: {fileID: 5307044267882577449}
   - component: {fileID: 7745450044755427977}
+  - component: {fileID: 1259559445212535967}
   m_Layer: 0
   m_Name: VisualCell
   m_TagString: Untagged
@@ -110,7 +111,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 89109dca0c420f843acf530eb0401bdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,3 +242,17 @@ PolygonCollider2D:
       - {x: 0.9296755, y: -0.050863717}
       - {x: 0.93070644, y: 0.4852091}
   m_UseDelaunayMesh: 1
+--- !u!114 &1259559445212535967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423124045622361132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d036c73ece86f034f875b14fe4aae1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PixelWaterCell
+  fps: 16
+  resourcesFolder: WaterCells

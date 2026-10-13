@@ -9,8 +9,8 @@ public class IsometricMapEditor : EditorWindow
 
     private TerrainType selectedTerrain = TerrainType.Grass;
     private bool eraseMode;
-    private int mapWidth = GameUtility.numCol;
-    private int mapHeight = GameUtility.numRow;
+    private int mapWidth = 0;
+    private int mapHeight = 0;
 
     // Kích thước một ô trên màn hình Editor.
     private float cellWidth = 64f;
@@ -28,6 +28,7 @@ public class IsometricMapEditor : EditorWindow
 
     private void OnGUI()
     {
+
         DrawSettings();
 
         if (mapData == null || terrainData == null)
@@ -74,21 +75,38 @@ public class IsometricMapEditor : EditorWindow
 
         EditorGUILayout.EndScrollView();
     }
+    private void LoadMapSettings()
+    {
+        mapWidth = mapData.numCol;
+        mapHeight = mapData.numRow;
+        turnLeft = mapData.turnLeft;
 
+        Repaint();
+    }
     private void DrawSettings()
     {
         EditorGUILayout.LabelField(
             "Map Settings",
             EditorStyles.boldLabel
         );
+        EditorGUI.BeginChangeCheck();
 
-        mapData = (MapData)EditorGUILayout.ObjectField(
+        MapData newMapData = (MapData)EditorGUILayout.ObjectField(
             "Map Data",
             mapData,
             typeof(MapData),
             false
         );
 
+        if (EditorGUI.EndChangeCheck())
+        {
+            mapData = newMapData;
+
+            if (mapData != null)
+            {
+                LoadMapSettings();
+            }
+        }
         terrainData = (TerrainData)EditorGUILayout.ObjectField(
             "Terrain Data",
             terrainData,
@@ -171,6 +189,7 @@ public class IsometricMapEditor : EditorWindow
             new Color(0.16f, 0.16f, 0.16f)
         );
 
+
         Vector2 corner = new Vector2(
             rect.x + (rect.width - (cellWidth * mapWidth)) / 2,
             rect.y + (rect.height - (cellHeight * mapHeight)) / 2
@@ -184,12 +203,14 @@ public class IsometricMapEditor : EditorWindow
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                int numColToremove = Mathf.Abs(y % (2 * maxColToRemove) - maxColToRemove); //3, 2
-                // Debug.Log(numColToremove);
-                int numColOfRow = mapWidth - numColToremove; //6, 7
-                int numIndexNeedFallBack = (int)Mathf.Floor(numColOfRow / 2); //3, 4
-                int minIndexRange = midCol - numIndexNeedFallBack; //1, 0
-                int maxIndexRange = numColOfRow + minIndexRange - 1; // 6, 6
+                // int numColToremove = Mathf.Abs(y % (2 * maxColToRemove) - maxColToRemove); //3, 2
+                // // Debug.Log(numColToremove);
+                // int numColOfRow = mapWidth - numColToremove; //6, 7
+                // int numIndexNeedFallBack = (int)Mathf.Floor(numColOfRow / 2); //3, 4
+                // int minIndexRange = midCol - numIndexNeedFallBack; //1, 0
+                // int maxIndexRange = numColOfRow + minIndexRange - 1; // 6, 6
+                int minIndexRange = 0;
+                int maxIndexRange = mapWidth;
                 if (x >= minIndexRange && x <= maxIndexRange)
                 {
                     Vector2Int position = new Vector2Int(x, y);

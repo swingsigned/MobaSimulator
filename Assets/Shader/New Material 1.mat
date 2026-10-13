@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Material 1
+  m_Shader: {fileID: 4800000, guid: 1e27f6a9951a6eb468ca43a264b1ff8d, type: 3}
+  m_Parent: {fileID: 2100000, guid: 2e4634b1ab767a9409f6a0132c006544, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _CloudShadow: 0
+    - _CrestAmount: 0.06
+    - _FlowAngle: 3.14
+    - _FoamWidth: 0
+    - _LandAmount: -0
+    - _PixelSize: 1
+    - _Preset: 4
+    - _Scale: 3.33
+    - _Seed: 3.03
+    - _ShallowWidth: 0
+    - _SparkleAmount: 0.1
+    - _Speed: 0.25
+    - _Swell: 0
+    - _Turbulence: 0
+    m_Colors:
+    - _ColorDeep: {r: 0.06699998, g: 0.18799996, b: 0.38399997, a: 1}
+    - _ColorMid: {r: 0.11399997, g: 0.31799996, b: 0.553, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

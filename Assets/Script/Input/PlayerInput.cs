@@ -36,11 +36,11 @@ public class PlayerInput : MonoBehaviour
                 cellInteractor = new CellInteractor();
                 cellInteractor.Interact(hit);
                 var champs = hit.GetComponentInParent<Cell>().GetChampList();
-                Camera.main.transform.position = new Vector3(
-                    hit.transform.position.x,
-                    hit.transform.position.y,
-                    Camera.main.transform.position.z
-                );
+                // Camera.main.transform.position = new Vector3(
+                //     hit.transform.position.x,
+                //     hit.transform.position.y,
+                //     Camera.main.transform.position.z
+                // );
                 foreach (var champ in champs)
                 {
                     Debug.Log(champ.Name);
