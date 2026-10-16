@@ -6,9 +6,9 @@ public static class GameUtility
 {
     public static readonly int StrengthId = Shader.PropertyToID("_Strength");
     //For Cell
-    public static Vector2 cellSize = new Vector2(32, 32);
+    public static Vector2 cellSize = new Vector2(48, 48);
     //For Map
-    public static float PPU = 16;
+    public static float PPU = 32;
     static public int minCol = 6, maxCol = 9;
     static public bool IsCellselected = false;
     static public bool hasChampSelected = false;

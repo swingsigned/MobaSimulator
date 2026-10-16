@@ -38,7 +38,7 @@ public class MapController : MonoBehaviour
                 // Debug.Log(minIndexRange + $",{col}," + maxIndexRange);
                 float offsetX = cellSize.x / PPU;
                 float offsetY = cellSize.y / PPU;
-                Vector2 position = new Vector2(col * offsetX, -(row * offsetY - (row * (15 / PPU))));
+                Vector2 position = new Vector2(col * offsetX, -(row * offsetY - (row * (23 / PPU))));
                 float designedOffset = Mathf.Max(cellSize.x, cellSize.y) / PPU / 2;
                 if (row % 2 != 0)
                 {
