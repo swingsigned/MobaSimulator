@@ -8,14 +8,16 @@ public class IsometricMapEditor : EditorWindow
     private TerrainData terrainData;
 
     private TerrainType selectedTerrain = TerrainType.Grass;
+    private global::ObjectOnCellData.ObjectTypeOnCell selectedObjectType = ObjectOnCellData.ObjectTypeOnCell.NULL;
+    private ObjectOnCellData objectOnCellData;
     private bool eraseMode;
     private int mapWidth = 0;
     private int mapHeight = 0;
 
     // Kích thước một ô trên màn hình Editor.
-    private float cellWidth = 64f;
-    private float cellHeight = 64f;
-    float heightTriangle = 14;
+    private float cellWidth = 32f;
+    private float cellHeight = 32f;
+    float heightTriangle = 10;
     private int turnLeft = 1;
 
     private Vector2 scrollPosition;
@@ -31,17 +33,18 @@ public class IsometricMapEditor : EditorWindow
 
         DrawSettings();
 
-        if (mapData == null || terrainData == null)
+        if (mapData == null || terrainData == null || objectOnCellData == null)
         {
             EditorGUILayout.HelpBox(
-                "Hãy gán MapData và TerrainData để bắt đầu.",
+                "Hãy gán MapData, TerrainData, ObjectData để bắt đầu.",
                 MessageType.Info
             );
             return;
         }
 
-        DrawPalette();
-
+        DrawPaletteTerrain();
+        EditorGUILayout.Space(6);
+        DrawPaletteObject();
         EditorGUILayout.Space(6);
 
         using (new EditorGUILayout.HorizontalScope())
@@ -113,6 +116,12 @@ public class IsometricMapEditor : EditorWindow
             typeof(TerrainData),
             false
         );
+        objectOnCellData = (ObjectOnCellData)EditorGUILayout.ObjectField(
+            "Object Data",
+            objectOnCellData,
+            typeof(ObjectOnCellData),
+            false
+        );
         mapWidth = EditorGUILayout.IntSlider(
             "Grid Width", mapWidth, 1, 32
         );
@@ -134,7 +143,7 @@ public class IsometricMapEditor : EditorWindow
         eraseMode = EditorGUILayout.Toggle("Erase Mode", eraseMode);
     }
 
-    private void DrawPalette()
+    private void DrawPaletteTerrain()
     {
         EditorGUILayout.LabelField(
             "Terrain Palette",
@@ -175,6 +184,53 @@ public class IsometricMapEditor : EditorWindow
 
                 EditorGUILayout.ObjectField(
                     terrain.terrainPrefab,
+                    typeof(GameObject),
+                    false
+                );
+            }
+        }
+    }
+    private void DrawPaletteObject()
+    {
+        EditorGUILayout.LabelField(
+            "Object Palette",
+            EditorStyles.boldLabel
+        );
+
+        if (objectOnCellData.objectFieldMap.Count == 0)
+        {
+            EditorGUILayout.HelpBox(
+                "Object chưa có cái nào.",
+                MessageType.Warning
+            );
+            return;
+        }
+
+        foreach (var object_ in objectOnCellData.objectFieldMap)
+        {
+            if (object_ == null)
+                continue;
+
+            bool selected =
+                selectedObjectType == object_.objectType;
+
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                GUI.enabled = !eraseMode;
+
+                if (GUILayout.Toggle(
+                    selected,
+                    object_.objectType.ToString(),
+                    "Button",
+                    GUILayout.Width(150)))
+                {
+                    selectedObjectType = object_.objectType;
+                }
+
+                GUI.enabled = true;
+
+                EditorGUILayout.ObjectField(
+                    object_.objBlueprint,
                     typeof(GameObject),
                     false
                 );
@@ -222,13 +278,14 @@ public class IsometricMapEditor : EditorWindow
                         cellWidth,
                         cellHeight
                     );
-
-                    TerrainType? type = GetTerrainAt(position);
-
+                    TerrainType? type = GetTerrainType(position);
+                    global::ObjectOnCellData.ObjectTypeOnCell? objectTypeOnCell = GetObjectType(position);
                     Color color = type.HasValue
                         ? GetTerrainColor(type.Value)
                         : new Color(0.3f, 0.3f, 0.3f, 0.35f);
-
+                    Color color1 = type.HasValue ? GetObjectColor(objectTypeOnCell.Value) :
+                    new Color(0f, 0f, 0f, 0.35f);
+                    DrawCircleCell(cellRect, color1);
                     DrawHexCell(cellRect, color);
 
                     // Viền của ô.
@@ -259,7 +316,7 @@ public class IsometricMapEditor : EditorWindow
                             }
                         }
                     );
-
+                    //Chuột trái 
                     if (e.type == EventType.MouseDown &&
                         e.button == 0 &&
                         cellRect.Contains(e.mousePosition))
@@ -267,12 +324,26 @@ public class IsometricMapEditor : EditorWindow
                         PaintCell(position);
                         e.Use();
                     }
-
                     if (e.type == EventType.MouseDrag &&
                         e.button == 0 &&
                         cellRect.Contains(e.mousePosition))
                     {
                         PaintCell(position);
+                        e.Use();
+                    }
+                    //Chuột phải 
+                    if (e.type == EventType.MouseDown &&
+                       e.button == 1 &&
+                       cellRect.Contains(e.mousePosition))
+                    {
+                        PaintObjectCell(position);
+                        e.Use();
+                    }
+                    if (e.type == EventType.MouseDrag &&
+                        e.button == 1 &&
+                        cellRect.Contains(e.mousePosition))
+                    {
+                        PaintObjectCell(position);
                         e.Use();
                     }
                 }
@@ -316,8 +387,20 @@ public class IsometricMapEditor : EditorWindow
         Handles.color = color;
         Handles.DrawAAConvexPolygon(points);
     }
+    private void DrawCircleCell(Rect cell, Color color)
+    {
+        Vector3 center = new Vector3(
+            cell.x + cell.width / 2f,
+            cell.y + cell.height / 2f,
+            0f
+        );
 
-    private TerrainType? GetTerrainAt(Vector2Int position)
+        float radius = Mathf.Min(cell.width, cell.height) / 2f;
+
+        Handles.color = color;
+        Handles.DrawSolidDisc(center, Vector3.forward, radius);
+    }
+    private TerrainType? GetTerrainType(Vector2Int position)
     {
         MapCellData cell = mapData.cells.Find(
             c => c.position == position
@@ -325,7 +408,14 @@ public class IsometricMapEditor : EditorWindow
 
         return cell == null ? null : cell.terrainType;
     }
+    private global::ObjectOnCellData.ObjectTypeOnCell? GetObjectType(Vector2Int position)
+    {
+        MapCellData cell = mapData.cells.Find(
+            c => c.position == position
+        );
 
+        return cell == null ? null : cell.objectType;
+    }
     //Đặt màu
     private Color GetTerrainColor(TerrainType type)
     {
@@ -338,7 +428,15 @@ public class IsometricMapEditor : EditorWindow
             TerrainType.HasTurretLand => new Color(0.85f, 0.55f, 0.2f),
             TerrainType.SubNexus => new Color(0.7f, 0.3f, 0.8f),
             TerrainType.MainNexus => new Color(1f, 0.2f, 0.2f),
-            _ => Color.gray
+            _ => new Color(0.25f, 0.55f, 0.25f)
+        };
+    }
+    private Color GetObjectColor(global::ObjectOnCellData.ObjectTypeOnCell type)
+    {
+        return type switch
+        {
+            ObjectOnCellData.ObjectTypeOnCell.Tree => Color.yellow,
+            _ => Color.black
         };
     }
 
@@ -348,7 +446,7 @@ public class IsometricMapEditor : EditorWindow
 
         if (eraseMode)
         {
-            mapData.RemoveCell(position);
+            mapData.RemoveTerrainCell(position);
         }
         else
         {
@@ -358,7 +456,22 @@ public class IsometricMapEditor : EditorWindow
         EditorUtility.SetDirty(mapData);
         Repaint();
     }
+    private void PaintObjectCell(Vector2Int position)
+    {
+        Undo.RecordObject(mapData, "Edit Isometric Map");
 
+        if (eraseMode)
+        {
+            mapData.RemoveObjectCell(position);
+        }
+        else
+        {
+            mapData.SetObjectCell(position, selectedObjectType);
+        }
+
+        EditorUtility.SetDirty(mapData);
+        Repaint();
+    }
     private void SaveMap()
     {
         mapData.numCol = mapWidth;

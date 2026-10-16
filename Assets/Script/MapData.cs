@@ -1,13 +1,14 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
-
 [Serializable]
 public class MapCellData
 {
     public Vector2Int position;
     public TerrainType terrainType;
+    public ObjectOnCellData.ObjectTypeOnCell objectType;
 }
 
 [CreateAssetMenu(
@@ -20,13 +21,13 @@ public class MapData : ScriptableObject
     public int numCol;
     public int numRow;
     public int turnLeft = 1;
-    public Dictionary<Vector2Int, TerrainType> InitializeLookup()
+    public Dictionary<Vector2Int, MapCellData> InitializeLookup()
     {
-        var lookup = new Dictionary<Vector2Int, TerrainType>();
+        var lookup = new Dictionary<Vector2Int, MapCellData>();
 
         foreach (var cell in cells)
         {
-            if (!lookup.TryAdd(cell.position, cell.terrainType))
+            if (!lookup.TryAdd(cell.position, cell))
             {
                 Debug.LogError(
                     $"Duplicate map position: {cell.position}",
@@ -54,15 +55,40 @@ public class MapData : ScriptableObject
             terrainType = terrainType
         });
     }
-
-    public bool RemoveCell(Vector2Int position)
+    public void SetObjectCell(Vector2Int position, ObjectOnCellData.ObjectTypeOnCell objectType)
     {
-        int index = cells.FindIndex(c => c.position == position);
+        MapCellData cell = cells.Find(c => c.position == position);
 
-        if (index < 0)
+        if (cell != null)
+        {
+            cell.objectType = objectType;
+            return;
+        }
+
+        cells.Add(new MapCellData
+        {
+            position = position,
+            objectType = objectType
+        });
+    }
+    public bool RemoveTerrainCell(Vector2Int position)
+    {
+        MapCellData cell = cells.Find(c => c.position == position);
+
+        if (cell == null)
             return false;
 
-        cells.RemoveAt(index);
+        cell.terrainType = TerrainType.Grass;
+        return true;
+    }
+    public bool RemoveObjectCell(Vector2Int position)
+    {
+        MapCellData cell = cells.Find(c => c.position == position);
+
+        if (cell == null)
+            return false;
+
+        cell.objectType = ObjectOnCellData.ObjectTypeOnCell.NULL;
         return true;
     }
 }
