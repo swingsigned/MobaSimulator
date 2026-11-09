@@ -44,21 +44,13 @@ public class MapController : MonoBehaviour
                 // Debug.Log(minIndexRange + $",{col}," + maxIndexRange);
                 SpawnTerrainOnCell(col, row, out Cell cell);
                 SpawnObjectOnCell(col, row);
-                var cellVisualSprite = cell.GetComponent<SpriteRenderer>();
-                if (col < midCol)
-                {
-                    if (cell.Type == TerrainType.HasTurretLand)
-                    {
-                        cellVisualSprite.flipX = true;
-                        Vector2 offsetXforTurret = cell.transform.GetChild(0).localPosition;
-                        cell.transform.GetChild(0).localPosition = new Vector2(offsetXforTurret.x * -1, offsetXforTurret.y);
-                    }
-                    if (cell.Type == TerrainType.Land)
-                    {
-                        // cellVisualSprite.color = GameUtility.redTeamCellColor;
-                    }
-
-                }
+                // if (col < midCol)
+                // {
+                //     if (cell.Type == TerrainType.Land)
+                //     {
+                //         // cellVisualSprite.color = GameUtility.redTeamCellColor;
+                //     }
+                // }
                 cell.Position = new Vector2(col, row);
                 mapUnderMatrixForm.TryAdd(cell.Position, cell.GetComponentInChildren<Cell>());
 
@@ -123,7 +115,7 @@ public class MapController : MonoBehaviour
         }
         var objectBlueprint = objectAtCell.objBlueprint;
         var iObject = Instantiate(objectBlueprint, spawnPosition + (Vector2)transform.position, Quaternion.identity, transform);
-        iObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = row;
+        iObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = row + 1;
 
     }
     public Cell getCellByPositionOnMatrix(Vector2 position)

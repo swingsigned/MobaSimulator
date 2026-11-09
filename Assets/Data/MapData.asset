@@ -21,13 +21,13 @@ MonoBehaviour:
     objectType: 0
   - position: {x: 2, y: 6}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 3, y: 6}
     terrainType: 3
     objectType: 0
   - position: {x: 4, y: 6}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 5, y: 6}
     terrainType: 3
     objectType: 0
@@ -47,29 +47,29 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 3, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 4, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 5, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 6, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 7, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 1, y: 3}
     terrainType: 0
     objectType: 0
   - position: {x: 2, y: 3}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 3, y: 3}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 4, y: 3}
     terrainType: 0
     objectType: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 1, y: 5}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 2, y: 4}
     terrainType: 3
@@ -119,14 +119,14 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 2, y: 2}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 4, y: 2}
     terrainType: 0
     objectType: 0
   - position: {x: 4, y: 1}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 5, y: 1}
     terrainType: 3
     objectType: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 3, y: 1}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 3, y: 2}
     terrainType: 3
@@ -158,13 +158,13 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 0, y: 6}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 1, y: 2}
     terrainType: 0
     objectType: 0
   - position: {x: 1, y: 4}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 0, y: 1}
     terrainType: 0
@@ -176,11 +176,11 @@ MonoBehaviour:
     terrainType: 0
     objectType: 4
   - position: {x: 8, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 8, y: 6}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 9, y: 5}
     terrainType: 0
     objectType: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
     terrainType: 3
     objectType: 0
   - position: {x: 1, y: 7}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 2, y: 8}
     terrainType: 3
@@ -234,18 +234,18 @@ MonoBehaviour:
     objectType: 0
   - position: {x: 9, y: 1}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 10, y: 0}
     terrainType: 0
     objectType: 0
   - position: {x: 9, y: 0}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 11, y: 0}
     terrainType: 0
     objectType: 0
   - position: {x: 10, y: 1}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 11, y: 1}
     terrainType: 0
@@ -254,13 +254,13 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 1, y: 8}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 1, y: 9}
     terrainType: 0
     objectType: 0
   - position: {x: 2, y: 10}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 3, y: 10}
     terrainType: 3
@@ -284,7 +284,7 @@ MonoBehaviour:
     terrainType: 3
     objectType: 0
   - position: {x: 10, y: 10}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 11, y: 10}
     terrainType: 0
@@ -296,11 +296,11 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 10, y: 11}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 9, y: 11}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 8, y: 11}
     terrainType: 3
     objectType: 0
@@ -315,19 +315,19 @@ MonoBehaviour:
     objectType: 0
   - position: {x: 4, y: 11}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 3, y: 11}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 2, y: 11}
     terrainType: 0
     objectType: 0
   - position: {x: 2, y: 9}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 3, y: 9}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 4, y: 9}
     terrainType: 0
     objectType: 0
@@ -348,9 +348,9 @@ MonoBehaviour:
     objectType: 4
   - position: {x: 10, y: 9}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 11, y: 9}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 12, y: 9}
     terrainType: 0
@@ -380,25 +380,25 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 11, y: 3}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 12, y: 4}
     terrainType: 0
     objectType: 0
   - position: {x: 12, y: 5}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 13, y: 6}
     terrainType: 1
     objectType: 0
   - position: {x: 12, y: 7}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 12, y: 8}
     terrainType: 0
     objectType: 0
   - position: {x: 10, y: 2}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 10, y: 5}
     terrainType: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
     terrainType: 3
     objectType: 0
   - position: {x: 11, y: 8}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 11, y: 7}
     terrainType: 3
@@ -420,7 +420,7 @@ MonoBehaviour:
     objectType: 0
   - position: {x: 10, y: 6}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 9, y: 7}
     terrainType: 0
     objectType: 4
@@ -431,10 +431,10 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 12, y: 6}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 11, y: 4}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 0, y: 8}
     terrainType: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
     objectType: 0
   - position: {x: 10, y: 3}
     terrainType: 3
-    objectType: 0
+    objectType: 1
   - position: {x: 9, y: 2}
     terrainType: 3
     objectType: 0
@@ -623,25 +623,25 @@ MonoBehaviour:
     terrainType: 0
     objectType: 0
   - position: {x: 3, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 4, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 5, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 6, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 7, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 8, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 9, y: 12}
-    terrainType: 1
+    terrainType: 0
     objectType: 0
   - position: {x: 10, y: 12}
     terrainType: 0

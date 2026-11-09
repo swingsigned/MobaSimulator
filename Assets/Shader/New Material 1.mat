@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _CloudShadow: 0
-    - _CrestAmount: 0.06
+    - _CrestAmount: 0.09
     - _FlowAngle: 3.14
     - _FoamWidth: 0
     - _LandAmount: -0
@@ -35,12 +35,15 @@ Material:
     - _Scale: 3.33
     - _Seed: 3.03
     - _ShallowWidth: 0
-    - _SparkleAmount: 0.1
-    - _Speed: 0.25
+    - _SparkleAmount: 1
+    - _Speed: 0.01
     - _Swell: 0
     - _Turbulence: 0
     m_Colors:
+    - _ColorCrest: {r: 0.21819143, g: 0.6891514, b: 0.85660374, a: 1}
     - _ColorDeep: {r: 0.06699998, g: 0.18799996, b: 0.38399997, a: 1}
-    - _ColorMid: {r: 0.11399997, g: 0.31799996, b: 0.553, a: 1}
+    - _ColorMid: {r: 0, g: 1, b: 0.8398278, a: 1}
+    - _Origin: {r: 0, g: 0, b: 0, a: 0}
+    - _Res: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

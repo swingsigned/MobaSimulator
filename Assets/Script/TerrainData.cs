@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum TerrainType
 {
-    Grass, Water, Ice, Land, HasTurretLand, SubNexus, MainNexus
+    Grass, Water, Ice, Land
 }
 [System.Serializable]
 public class Terrain

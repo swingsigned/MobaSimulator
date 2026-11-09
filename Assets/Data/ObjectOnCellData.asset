@@ -15,5 +15,7 @@ MonoBehaviour:
   objectFieldMap:
   - objBlueprint: {fileID: 7040547289899000890, guid: 035f2e34f4b4e174bb4a2e0f98a222a0, type: 3}
     objectType: 4
+  - objBlueprint: {fileID: 6881521965947523344, guid: 58980bd3303e65b40bbab0cd8b5cba4f, type: 3}
+    objectType: 1
   - objBlueprint: {fileID: 0}
     objectType: 0

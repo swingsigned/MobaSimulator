@@ -425,9 +425,6 @@ public class IsometricMapEditor : EditorWindow
             TerrainType.Water => new Color(0.15f, 0.4f, 0.85f),
             TerrainType.Ice => new Color(0.55f, 0.85f, 1f),
             TerrainType.Land => new Color(0.55f, 0.42f, 0.28f),
-            TerrainType.HasTurretLand => new Color(0.85f, 0.55f, 0.2f),
-            TerrainType.SubNexus => new Color(0.7f, 0.3f, 0.8f),
-            TerrainType.MainNexus => new Color(1f, 0.2f, 0.2f),
             _ => new Color(0.25f, 0.55f, 0.25f)
         };
     }
@@ -436,6 +433,7 @@ public class IsometricMapEditor : EditorWindow
         return type switch
         {
             ObjectOnCellData.ObjectTypeOnCell.Tree => Color.yellow,
+            ObjectOnCellData.ObjectTypeOnCell.Turret => Color.red,
             _ => Color.black
         };
     }
